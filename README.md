@@ -2,10 +2,10 @@
 
 - allows you to randomly get a meme and add your own captioning.
 
-# Why?
+# But Why?
 
 - why not?
-- practice, practice, practic
+- practice, practice, practice
 
 ## NPM MODULES:
 
@@ -16,4 +16,4 @@
 
 - Documentation for API: https://api.imgflip.com
 
-* first time working with CSS modules
+* want to be familiar working with CSS modules

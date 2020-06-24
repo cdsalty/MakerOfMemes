@@ -3,22 +3,38 @@ import styles from './styles.module.css';
 
 const Meme = () => {
   const [memes, setMemes] = useState([]); // set to empty array to start off with
+  const [memeIndex, setMemeIndex] = useState(0); // will pertain to the skip button, starting with zero;
+
+  // Shuffle: (review fisher-yates algorithm)
+  const shuffleMemes = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * i);
+      const temp = array[i];
+      // console.log({temp});
+      array[i] = array[j];
+      array[j] = temp;
+    }
+  };
 
   useEffect(() => {
     fetch('https://api.imgflip.com/get_memes')
-      .then((res) => res.json())
+      .then((response) => response.json())
       .then((res) => {
-        const memes = res.data.memes; // by creating this constant, next thing to do is create the state with 'useState()'
-        setMemes(memes);
+        const _memes = res.data.memes; // after creating this constant, next thing is create state with 'useState()'
+        shuffleMemes(_memes); // need to shuffle before setting it.
+        setMemes(_memes);
       });
   }, []);
 
   return (
-    // make sure the memes length is not a falsey, length=0
+    // make sure the memes length is not a falsey(length=0)
     memes.length ? (
       <div className={styles.container}>
-        <button className={styles.skip}>Skip</button>
-        <img src={memes[0].url} />
+        {/* <button onClick={() => console.log('clicked')} className={styles.skip}> */}
+        <button onClick={() => setMemeIndex(memeIndex + 1)} className={styles.skip}>
+          Skip
+        </button>
+        <img src={memes[memeIndex].url} />
       </div>
     ) : (
       <React.Fragment></React.Fragment>
