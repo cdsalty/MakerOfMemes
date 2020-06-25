@@ -17,3 +17,9 @@
 - Documentation for API: https://api.imgflip.com
 
 * want to be familiar working with CSS modules
+
+#### THINGS I LEARNED OR THOUGHT WORTH MENTIONING
+
+- Create/Convert to Array format; take the index position of the current memes and get the value from "box_count". (box_count: 3); fill the count with "". (strings)
+  - box_count refers to the amount of captions the user can make. This tells me how many empty inputs I need to display.
+    setCaptions(Array(memes[memeIndex].box_count.fill(""));
