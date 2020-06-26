@@ -5,7 +5,21 @@ const Meme = () => {
   const [memes, setMemes] = useState([]); // set to empty array to start off with
   const [memeIndex, setMemeIndex] = useState(0); // will pertain to the skip button, starting with zero; will cause useEffect to generate box count
   const [captions, setCaptions] = useState([]); // an array of strings; each string will represent the value of the caption for a given input.
-  // if box count is two, render two inputs on the screen. input[0] will be the first, etc.
+
+  // updateCaption from onChange event listener
+  const updateCaption = (e, index) => {
+    const text = e.target.value || ''; // if we get something we don't expect, get ""
+    setCaptions(
+      // map over, passing in the caption and index; if index is the same as index caption, return the event's text
+      captions.map((c, i) => {
+        if (index === i) {
+          return text;
+        } else {
+          return c; // return the caption that already exist
+        }
+      })
+    );
+  };
 
   // Shuffle: (review fisher-yates algorithm)
   const shuffleMemes = (array) => {
@@ -31,11 +45,11 @@ const Meme = () => {
 
   // ADD/DISPLAY CAPTION BOXES FOR USER
   useEffect(() => {
+    // initalize the boxes as empty strings to represent empty values for inputs when they're rendered on screen
+    // will use captions to loop through and generate the input boxes
+    // in order to add these to an array to loop through the captions, you need to CREATE THE ARRAY FIRST.
+    // Array constructor: (without fill, will get an undefined value)
     if (memes.length) {
-      // initalize the boxes as empty strings to represent empty values for inputs when they're rendered on screen
-      // will use captions to loop through and generate the input boxes
-      // in order to add these to an array to loop through the captions, you need to CREATE THE ARRAY FIRST.
-      // Array constructor: (without fill, will get an undefined value)
       setCaptions(Array(memes[memeIndex].box_count).fill('')); // creating an array of empty strings per the value of box_strings
     }
   }, [memeIndex, memes]);
@@ -58,7 +72,7 @@ const Meme = () => {
         </button>
         {// inserting javascript
         captions.map((caption, index) => (
-          <input key={index} />
+          <input onChange={(e) => updateCaption(e, index)} key={index} />
         ))}
         <img src={memes[memeIndex].url} alt={memes.id} />
       </div>
