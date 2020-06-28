@@ -1,12 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import styles from './styles.module.css';
+import {useHistory} from 'react-router-dom';
 
 const Meme = () => {
   const [memes, setMemes] = useState([]); // set to empty array to start off with
   const [memeIndex, setMemeIndex] = useState(0); // will pertain to the skip button, starting with zero; will cause useEffect to generate box count
   const [captions, setCaptions] = useState([]); // an array of strings; each string will represent the value of the caption for a given input.
 
-  // UPDATE CAPTION from onChange event listener, passing in the event and index of the current index on
+  // useHistory()
+  const history = useHistory();
+
+  // UPDATE CAPTION (coming from the onChange event listener; passing in the event and index of the current index on
   const updateCaption = (e, index) => {
     const text = e.target.value || ''; // if we get something we don't expect, get ""
     setCaptions(
@@ -37,13 +41,18 @@ const Meme = () => {
       console.log(index, c); /// VERIFY
       formData.append(`boxes[${index}][text]`, c);
 
-      // the api request
+      // Fetching the Meme back from the server
       fetch('https://api.imgflip.com/caption_image', {
         method: 'POST',
         body: formData
       })
         .then((res) => res.json())
-        .then((responseFromServer) => console.log(responseFromServer));
+        // .then((responseFromServer) => console.log(responseFromServer));
+        .then((responseFromServer) => {
+          // whatever is pushed will be appended to the url the user is currently on.
+          // history.push(`./generated`); // (will go from localhost:3000 to localhost:300/generated) to verify it works
+          history.push(`/generated?url=${responseFromServer.data.url}`);
+        });
     });
   };
 
