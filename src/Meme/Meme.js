@@ -23,7 +23,29 @@ const Meme = () => {
   };
 
   // GENERATE A MEME (will be called once you click on the generate button)
-  const generateMeme = () => {};
+  const generateMeme = () => {
+    // get the current meme
+    const currentMeme = memes[memeIndex];
+    // ** CREATE THE FORM DATA OBJECT TO MAKE POST REQUEST **
+    const formData = new FormData();
+    // append: takes the name of the item being set, the second is the value
+    formData.append('username', 'cdsalty');
+    formData.append('password', 'love');
+    formData.append('template_id', currentMeme.id);
+    // loop through captions and set a value for each one.
+    captions.forEach((c, index) => {
+      console.log(index, c); /// VERIFY
+      formData.append(`boxes[${index}][text]`, c);
+
+      // the api request
+      fetch('https://api.imgflip.com/caption_image', {
+        method: 'POST',
+        body: formData
+      })
+        .then((res) => res.json())
+        .then((responseFromServer) => console.log(responseFromServer));
+    });
+  };
 
   // Shuffle: (review fisher-yates algorithm)
   const shuffleMemes = (array) => {
