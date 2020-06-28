@@ -6,12 +6,13 @@ const Meme = () => {
   const [memeIndex, setMemeIndex] = useState(0); // will pertain to the skip button, starting with zero; will cause useEffect to generate box count
   const [captions, setCaptions] = useState([]); // an array of strings; each string will represent the value of the caption for a given input.
 
-  // updateCaption from onChange event listener
+  // UPDATE CAPTION from onChange event listener, passing in the event and index of the current index on
   const updateCaption = (e, index) => {
     const text = e.target.value || ''; // if we get something we don't expect, get ""
     setCaptions(
       // map over, passing in the caption and index; if index is the same as index caption, return the event's text
       captions.map((c, i) => {
+        // if the index of the function matches the current index of the caption looping
         if (index === i) {
           return text;
         } else {
@@ -20,6 +21,9 @@ const Meme = () => {
       })
     );
   };
+
+  // GENERATE A MEME (will be called once you click on the generate button)
+  const generateMeme = () => {};
 
   // Shuffle: (review fisher-yates algorithm)
   const shuffleMemes = (array) => {
@@ -54,16 +58,11 @@ const Meme = () => {
     }
   }, [memeIndex, memes]);
 
-  // For Testing...
-  useEffect(() => {
-    console.log(captions);
-  }, [captions]);
-
   return (
     // verify memes length is not a falsey, (length=0)
     memes.length ? (
       <div className={styles.container}>
-        <button onClick={() => console.log('gEnErAtE')} className={styles.generate}>
+        <button onClick={generateMeme} className={styles.generate}>
           Generate Meme
         </button>
         {/* <button onClick={() => console.log('clicked')} className={styles.skip}> */}

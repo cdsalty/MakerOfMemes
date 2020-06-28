@@ -14,7 +14,12 @@
 
 ### Other...
 
-- Documentation for API: https://api.imgflip.com
+- Documentation for API: https://api.imgflip.com --- Need to create a free account
+
+  - this API only accepts form data(a form data object) to build the body for the POST request.
+  - it will not be a json request but a one of form data. (new to me)
+
+  -
 
 * want to be familiar working with CSS modules
 
