@@ -1,10 +1,13 @@
 .container {
-  margin-top: 50px;
+	margin-top: 80px;
 }
 .copy {
-  background-color: #0275d8;
-  margin-top: 20px;
+	/* background-color: #0275d8; */
+	background-color: rgb(135, 129, 129);
+	margin-top: 20px;
 }
 .home {
-  background-color: #f0ad4e;
+	/* background-color: #f0ad4e; */
+	background-color: blue;
+	font-size: 14px;
 }
