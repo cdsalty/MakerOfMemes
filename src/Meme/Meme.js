@@ -49,7 +49,7 @@ const Meme = () => {
         .then((res) => res.json())
         // .then((responseFromServer) => console.log(responseFromServer));
         .then((responseFromServer) => {
-          // whatever is pushed will be appended to the url the user is currently on.
+          // whatever is pushed will be appended to the url of the current page.
           // history.push(`./generated`); // (will go from localhost:3000 to localhost:300/generated) to verify it works
           history.push(`/generated?url=${responseFromServer.data.url}`);
         });
@@ -94,11 +94,11 @@ const Meme = () => {
     memes.length ? (
       <div className={styles.container}>
         <button onClick={generateMeme} className={styles.generate}>
-          Generate Meme
+          Create Meme
         </button>
         {/* <button onClick={() => console.log('clicked')} className={styles.skip}> */}
         <button onClick={() => setMemeIndex(memeIndex + 1)} className={styles.skip}>
-          Skip
+          Skip Image
         </button>
         {// inserting javascript
         captions.map((caption, index) => (

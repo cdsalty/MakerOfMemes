@@ -4,8 +4,8 @@
   margin-top: 50px;
 }
 .skip {
-  background-color: #f0ad4e;
+  background-color: rgb(135, 129, 129); /* f2ad4d */
 }
 .generate {
-  background-color: #0275d8;
+  background-color: blue;
 }
